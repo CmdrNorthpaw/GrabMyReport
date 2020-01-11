@@ -1,6 +1,3 @@
-import platform
-import os
-
 print("""
 =============================================================================================
    ____                  _       __  __           ____                                  _
@@ -12,3 +9,8 @@ print("""
  ==============================================================================================""")
  print("Welcome to GrabMyReport v0.1!")
  print("To get started, select the service you need")
+ print("1. Grab crash report")
+ print("2. Grab running processes")
+ print("3. Grab system specs")
+ grabWanted = input("Enter service (1-3)")
+ discordUser = raw_input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)")
