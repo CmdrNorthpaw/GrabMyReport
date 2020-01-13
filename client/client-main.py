@@ -1,9 +1,11 @@
 import socket
 import platform
 import grab-crash-report
+import grab-process-report
 
+sock =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 os = platform.system()
-
+sock.connect(localhost)
 print("""
 =============================================================================================
    ____                  _       __  __           ____                                  _
@@ -24,3 +26,12 @@ discordUser = raw_input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)"
 if grabWanted == 1:
     minecraftDir = raw_input('Enter your Minecraft directory (leave blamk for default)')
     report = grab-crash-report.grabCrash(os, minecraftDir)
+elif grabWanted == 2:
+    # Do things
+elif grabWanted == 3:
+    # Moar things
+
+sock.connect('34.73.189.184', 9254)
+print('Connected to Discord bot')
+sock.send(report.encode())
+sock.close()

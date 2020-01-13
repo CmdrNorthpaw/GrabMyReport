@@ -9,3 +9,5 @@ sock.listen(5)
 
 while True:
     clientSock, address = sock.accept()
+    report = sock.recv(1024)
+    report = report(message.decode())
