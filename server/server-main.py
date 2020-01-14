@@ -40,4 +40,4 @@ def run_server(host, port):
             print('Received: "' + incoming.decode('utf-8') + '"')
             # if we didn't break, just prepend the message and return as is
 
-run_server(34.73.189.184, 9254)
+run_server('34.73.189.184', 9254)
