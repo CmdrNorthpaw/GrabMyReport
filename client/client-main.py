@@ -1,7 +1,6 @@
 import socket
 import platform
-import grab-crash-report
-import grab-process-report
+import grabCrashReport
 
 sock =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 os = platform.system()
@@ -25,7 +24,7 @@ discordUser = raw_input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)"
 
 if grabWanted == 1:
     minecraftDir = raw_input('Enter your Minecraft directory (leave blamk for default)')
-    report = grab-crash-report.grabCrash(os, minecraftDir)
+    report = grabCrashReport.grabCrash(os, minecraftDir)
 elif grabWanted == 2:
     # Do things
 elif grabWanted == 3:
