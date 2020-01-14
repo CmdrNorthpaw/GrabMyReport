@@ -1,6 +1,7 @@
 import socket
 import platform
 import grabCrashReport
+import grabProcessReport
 os = platform.system()
 print("""
 =============================================================================================
@@ -23,7 +24,7 @@ if int(grabWanted) == 1:
     minecraftDir = input('Enter your Minecraft directory (leave blamk for default)')
     report = grabCrashReport.grabCrash(os, minecraftDir)
 elif grabWanted == 2:
-    print('Doing a thing')
+    report = grabProcessReport.grabProcess()
 elif grabWanted == 3:
     print('Doing more things')
 
