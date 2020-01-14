@@ -1,10 +1,7 @@
 import socket
 import platform
 import grabCrashReport
-
-sock =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 os = platform.system()
-sock.connect(localhost)
 print("""
 =============================================================================================
    ____                  _       __  __           ____                                  _
@@ -20,15 +17,15 @@ print("1. Grab crash report")
 print("2. Grab running processes")
 print("3. Grab system specs")
 grabWanted = input("Enter service (1-3)")
-discordUser = raw_input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)")
+discordUser = input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)")
 
-if grabWanted == 1:
-    minecraftDir = raw_input('Enter your Minecraft directory (leave blamk for default)')
+if int(grabWanted) == 1:
+    minecraftDir = input('Enter your Minecraft directory (leave blamk for default)')
     report = grabCrashReport.grabCrash(os, minecraftDir)
 elif grabWanted == 2:
-    # Do things
+    print('Doing a thing')
 elif grabWanted == 3:
-    # Moar things
+    print('Doing more things')
 
 def run_client(host, port):
     global report

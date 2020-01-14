@@ -1,5 +1,8 @@
 import psutil
 
-processList = psutil.process_iter()
-for list in processList:
-    print(list)
+listProcesses = []
+processes = psutil.process_iter()
+for list in processes:
+    listProcesses.append(list)
+
+print(type(listProcesses))
