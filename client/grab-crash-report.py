@@ -14,5 +14,5 @@ def grabCrash(platform, directory):
     else:
         os.chdir(directory)
     crashReport = read('launcher_log.txt')
+    print(crashReport)
     return crashReport
-            
