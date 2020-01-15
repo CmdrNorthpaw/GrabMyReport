@@ -1,6 +1,8 @@
 import discord
+from discord.ext import commands
 import socket
 from os import environ
+from pastebin import PastebinAPI as pastebin
 report = ''
 
 def run_server(host, port):
@@ -37,7 +39,13 @@ def run_server(host, port):
                # break the inner loop and await a new connection
                break
 
-            print('Received: "' + incoming.decode('utf-8') + '"')
+        report = incoming.decode('utf-8') + '"')
             # if we didn't break, just prepend the message and return as is
 
 run_server('0.0.0.0', 9254)
+
+pastebinKey = environ.get('pastebinKey')
+pastebinUser = environ.get('pastebinUser')
+pastebinPass = environ.get('pastebinPass')
+discordKey = environ.get('grabMyReportKey')
+pastebinUserKey = pastebin.generate_user_key(pastebinKey, pastebinUser, pastebinPass)
