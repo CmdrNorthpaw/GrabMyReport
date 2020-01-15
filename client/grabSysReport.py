@@ -14,7 +14,4 @@ def grabSys(platform):
         gpuDict = gpu.__dict__
     listSys.append(f'GPU: {gpuDict["name"]}')
     sysReport = '\n'.join(listSys)
-    print(sysReport)
     return sysReport
-
-grabSys('Windows')
