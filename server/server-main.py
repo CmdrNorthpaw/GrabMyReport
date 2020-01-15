@@ -4,6 +4,13 @@ import socket
 from os import environ
 from pastebin import PastebinAPI as pastebin
 report = ''
+pastebinKey = environ.get('pastebinKey')
+pastebinUser = environ.get('pastebinUser')
+pastebinPass = environ.get('pastebinPass')
+discordKey = environ.get('grabMyReportKey')
+pastebinUserKey = pastebin.generate_user_key(pastebinKey, pastebinUser, pastebinPass)
+
+bot = commands.Bot(command_prefix='?')
 
 def run_server(host, port):
     global report
@@ -44,8 +51,6 @@ def run_server(host, port):
 
 run_server('0.0.0.0', 9254)
 
-pastebinKey = environ.get('pastebinKey')
-pastebinUser = environ.get('pastebinUser')
-pastebinPass = environ.get('pastebinPass')
-discordKey = environ.get('grabMyReportKey')
-pastebinUserKey = pastebin.generate_user_key(pastebinKey, pastebinUser, pastebinPass)
+def pasteAndSend():
+    pasteLink = pastebin.paste(pastebinKey, report, pastebinUser, paste_expire_date='1H')
+    
