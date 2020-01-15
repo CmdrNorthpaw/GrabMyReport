@@ -2,6 +2,7 @@ import socket
 import platform
 import grabCrashReport
 import grabProcessReport
+import grabSysReport
 os = platform.system()
 print("""
 =============================================================================================
@@ -26,7 +27,7 @@ if int(grabWanted) == 1:
 elif grabWanted == 2:
     report = grabProcessReport.grabProcess()
 elif grabWanted == 3:
-    print('Doing more things')
+    report = grabSysReport.grabSys(os)
 
 def run_client(host, port):
     global report

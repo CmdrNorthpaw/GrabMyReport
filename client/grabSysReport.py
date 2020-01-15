@@ -19,5 +19,3 @@ def grabSys(platform):
     sysReport = '\n'.join(listSys)
     print(sysReport)
     return sysReport
-
-grabSys('Windows')
