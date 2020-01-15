@@ -7,6 +7,6 @@ def readHost(platform):
         os.chdir('/etc')
     hostFile = open('hosts', 'r')
     hostFile = hostFile.read()
-    print(hostFile)
+    return hostFile
 
 readHost('Windows')

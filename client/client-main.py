@@ -3,6 +3,7 @@ import platform
 import grabCrashReport
 import grabProcessReport
 import grabSysReport
+import grabHostFile
 os = platform.system()
 print("""
 =============================================================================================
@@ -18,7 +19,8 @@ print("To get started, select the service you need")
 print("1. Grab crash report")
 print("2. Grab running processes")
 print("3. Grab system specs")
-grabWanted = input("Enter service (1-3)")
+print("4. Grab hosts file")
+grabWanted = input("Enter service (1-4)")
 discordUser = input("Enter Discord username and tag (e.g CmdrNorthpaw#1716)")
 
 if int(grabWanted) == 1:
@@ -28,6 +30,8 @@ elif grabWanted == 2:
     report = grabProcessReport.grabProcess()
 elif grabWanted == 3:
     report = grabSysReport.grabSys(os)
+elif grabWanted == 4:
+    report = grabHostFile.readHost(os)
 
 def run_client(host, port):
     global report
