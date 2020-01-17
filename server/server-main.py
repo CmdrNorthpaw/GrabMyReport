@@ -49,7 +49,7 @@ def run_server(host, port):
                # break the inner loop and await a new connection
                break
 
-        report = incoming.decode('utf-8') + '"')
+        report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
 run_server('0.0.0.0', 9254)
