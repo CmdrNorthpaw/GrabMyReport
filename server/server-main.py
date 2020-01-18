@@ -10,6 +10,13 @@ from pasteee import Paste as paste
 
 bot = commands.Bot(command_prefix='?')
 
+def pasteAndSend(data):
+    data = data.decode('UTF-8')
+    pasteLink = paste(data, private=False, views=20)
+    pasteLink = pasteLink['link']
+    channel = bot.get_channel(667025203523616773)
+    channel.send(f'Report: {pasteLink}')
+    
 def run_server(host, port):
     global report
     # TCP/IP
