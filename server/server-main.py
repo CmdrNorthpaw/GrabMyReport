@@ -4,11 +4,9 @@ import socket
 from os import environ
 from pastebin import PastebinAPI as pastebin
 report = ''
-pastebinKey = environ.get('pastebinKey')
-pastebinUser = environ.get('pastebinUser')
-pastebinPass = environ.get('pastebinPass')
 discordKey = environ.get('grabMyReportKey')
-pastebinUserKey = pastebin.generate_user_key(api_dev_key=pastebinKey, username=pastebinUser, password=pastebinPass)
+pasteeeKey = environ.get('pasteeeKey')
+from pasteee import Paste as paste
 
 bot = commands.Bot(command_prefix='?')
 
@@ -55,6 +53,8 @@ def run_server(host, port):
 run_server('0.0.0.0', 9254)
 
 def pasteAndSend(data):
-    pasteLink = pastebin.paste(pastebinKey, data, pastebinUser, paste_expire_date='1H')
+    data = data.decode('UTF-8')
+    pasteLink = paste(data, private=False, views=20)
+    pasteLink = pasteLink['link']
     channel = bot.get_channel(667025203523616773)
     channel.send(f'Report: {pasteLink}')
