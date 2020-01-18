@@ -19,7 +19,8 @@ except ImportError:
     from urllib import urlencode
     import urllib2 as urlerror
 import json
-
+import ssl
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
 
 class PasteError(Exception):
     """Exception class for this module"""
@@ -82,7 +83,7 @@ class Paste(object):
             # API incorrectly returns success so we raise error locally
             raise PasteError("Options 'expire' and 'views' are mutually exclusive")
         request = urlrequest(
-            "https://paste.ee/api",
+            "https://paste.ee/api", context = context,
             data=urlencode(
                 {
                     'paste': paste,
