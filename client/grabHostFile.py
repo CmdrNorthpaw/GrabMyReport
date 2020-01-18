@@ -8,5 +8,3 @@ def readHost(platform):
     hostFile = open('hosts', 'r')
     hostFile = hostFile.read()
     return hostFile
-
-readHost('Windows')

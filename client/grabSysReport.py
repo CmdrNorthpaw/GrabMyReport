@@ -1,5 +1,7 @@
 from system_info import sysinfo
-from gpuinfo.windows import get_gpus
+from platform import system
+if system == 'Windows':
+    from gpuinfo.windows import get_gpus
 from psutil import virtual_memory
 
 def grabSys(platform):

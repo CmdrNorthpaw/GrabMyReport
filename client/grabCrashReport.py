@@ -1,6 +1,7 @@
 import os
 
 winDir = os.environ.get('APPDATA')
+homeDir = os.environ.get('HOME')
 def grabCrash(platform, directory):
     if directory == '':
         if platform == 'Windows':
@@ -8,7 +9,7 @@ def grabCrash(platform, directory):
             os.chdir(winDir + '\.minecraft')
         elif platform == 'Linux':
             print("Using default Linux directory for Minecraft (~/.minecraft)")
-            os.chdir('~/.minecraft')
+            os.chdir( homeDir + '/.minecraft')
         elif platform == 'macOS':
             print("Using default macOS directory for Minecraft (~/Library/Application Support/minecraft)")
             os.chdir('~/Library/Application Support/minecraft')
