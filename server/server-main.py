@@ -8,7 +8,7 @@ pastebinKey = environ.get('pastebinKey')
 pastebinUser = environ.get('pastebinUser')
 pastebinPass = environ.get('pastebinPass')
 discordKey = environ.get('grabMyReportKey')
-pastebinUserKey = pastebin.generate_user_key(pastebinKey, pastebinUser, pastebinPass)
+pastebinUserKey = pastebin.generate_user_key(api_dev_key=pastebinKey, username=pastebinUser, password=pastebinPass)
 
 bot = commands.Bot(command_prefix='?')
 
