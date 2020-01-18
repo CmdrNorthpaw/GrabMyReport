@@ -75,7 +75,7 @@ class Paste(object):
     def __new__(cls, paste,
                 private=True, lang="plain",
                 key="public", desc="",
-                expire=0, views=0, encrypted=False):
+                expire=0, views=0, encrypted=True):
         if not paste:
             raise PasteError("No paste provided")
         if expire and views:
