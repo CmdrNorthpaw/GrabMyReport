@@ -4,6 +4,7 @@ import socket
 from os import environ
 import hastebin
 import logging
+from multiprocess import Process
 report = ''
 discordKey = environ.get('grabMyReportKey')
 logging.basicConfig(level=logging.INFO)
@@ -56,6 +57,7 @@ async def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-
-run_server('0.0.0.0', 9254)
-bot.run(discordKey)
+serverProcess = Process(target=run_server('0.0.0.0', 9254))
+botProcess = Process(target=bot.run(discordKey))
+serverProcess.start()
+botProcess.start()
