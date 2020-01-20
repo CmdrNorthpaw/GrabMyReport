@@ -6,7 +6,7 @@ import logging
 discordKey = environ.get('grabMyReportKey')
 logging.basicConfig(level=logging.INFO)
 
-bot = commands.bot(command_prefix='?')
+bot = commands.Bot(command_prefix='?')
 
 def pasteAndSend(data):
     data = data.decode('utf-8')
