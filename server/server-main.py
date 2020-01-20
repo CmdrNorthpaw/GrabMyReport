@@ -12,7 +12,7 @@ def pasteAndSend(data):
     data = data.decode('utf-8')
     pasteLink = hastebin.post(data)
     channel = bot.get_channel(667025203523616773)
-    channel.send(f'Report: {pasteLink}')
+    channel.send(f"Report: {pasteLink}")
 
 def run_server(host, port):
     global report
