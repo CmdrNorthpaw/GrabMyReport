@@ -3,8 +3,10 @@ from discord.ext import commands
 import socket
 from os import environ
 import hastebin
+import logging
 report = ''
 discordKey = environ.get('grabMyReportKey')
+logging.basicConfig(level=logging.INFO)
 
 bot = commands.Bot(command_prefix='?')
 
