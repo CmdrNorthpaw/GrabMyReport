@@ -12,6 +12,3 @@ def grabProcess():
     process = '\n \n'.join(strList)
     print(process)
     return process
-
-#print(grabProcess())
-grabProcess()
