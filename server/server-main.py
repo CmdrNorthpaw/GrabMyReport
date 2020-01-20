@@ -14,7 +14,7 @@ def pasteAndSend(data):
     channel = bot.get_channel(667025203523616773)
     channel.send(f"Report: {pasteLink}")
 
-def run_server(host, port):
+async def run_server(host, port):
     global report
     # TCP/IP
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -55,4 +55,4 @@ def run_server(host, port):
             # if we didn't break, just prepend the message and return as is
 
 bot.run(discordKey)
-run_server('0.0.0.0', 9254)
+await run_server('0.0.0.0', 9254)
