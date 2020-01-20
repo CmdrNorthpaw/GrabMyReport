@@ -1,23 +1,7 @@
-import discord
-from discord.ext import commands
 import socket
-from os import environ
-import hastebin
-import logging
-from multiprocess import Process
-report = ''
-discordKey = environ.get('grabMyReportKey')
-logging.basicConfig(level=logging.INFO)
+import pasteAndSend
 
-bot = commands.Bot(command_prefix='?')
-
-def pasteAndSend(data):
-    data = data.decode('utf-8')
-    pasteLink = hastebin.post(data)
-    channel = bot.get_channel(667025203523616773)
-    channel.send(f"Report: {pasteLink}")
-
-async def run_server(host, port):
+def run_server(host, port):
     global report
     # TCP/IP
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -45,7 +29,7 @@ async def run_server(host, port):
             # empty bytes object means EOF here, but we also let the client send 'quit' to signal shutdown
             if incoming:
                 print(incoming)
-                pasteAndSend(incoming)
+                pasteAndSend.pasteAndSend(incoming)
             if incoming == b'' or incoming == b'quit':
                # neither of these steps are formally required, but are
                # hygienic to do when we know the socket is going away
@@ -57,7 +41,4 @@ async def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-serverProcess = Process(target=run_server('0.0.0.0', 9254))
-botProcess = Process(target=bot.run(discordKey))
-serverProcess.start()
-botProcess.start()
+run_server('0.0.0.0', 9254))
