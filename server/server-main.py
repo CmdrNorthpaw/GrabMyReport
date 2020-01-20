@@ -2,11 +2,11 @@ import discord
 from discord.ext import commands
 import socket
 from os import environ
-from pastebin import PastebinAPI as pastebin
+import hastebin
 report = ''
 discordKey = environ.get('grabMyReportKey')
-pasteeeKey = environ.get('pasteeeKey')
-from pasteee import Paste as paste
+
+
 
 bot = commands.Bot(command_prefix='?')
 
@@ -60,9 +60,8 @@ def run_server(host, port):
 run_server('0.0.0.0', 9254)
 
 def pasteAndSend(data):
-    data = data.decode('UTF-8')
-    pasteLink = paste(data, private=False, views=20)
-    pasteLink = pasteLink['link']
+    data = data.decode('utf-8')
+    pasteLink = hastebin.post(data)
     channel = bot.get_channel(667025203523616773)
     channel.send(f'Report: {pasteLink}')
 
