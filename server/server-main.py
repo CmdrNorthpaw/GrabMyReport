@@ -54,6 +54,5 @@ def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-run_server('0.0.0.0', 9254)
-
 bot.run(discordKey)
+run_server('0.0.0.0', 9254)
