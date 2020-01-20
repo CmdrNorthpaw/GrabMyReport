@@ -57,4 +57,4 @@ async def run_server(host, port):
             # if we didn't break, just prepend the message and return as is
 
 bot.run(discordKey)
-await run_server('0.0.0.0', 9254)
+run_server('0.0.0.0', 9254)
