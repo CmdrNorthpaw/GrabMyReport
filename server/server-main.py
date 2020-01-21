@@ -5,6 +5,7 @@ from discord.ext import commands
 from os import environ
 import hastebin
 import logging
+import pickle
 discordKey = environ.get('grabMyReportKey')
 logging.basicConfig(level=logging.INFO)
 
@@ -16,6 +17,7 @@ async def on_login():
 
 def pasteAndSend(data):
     data = data.decode('utf-8')
+    data = pickle.loads(data)
     pasteLink = hastebin.post(data)
     channel = bot.get_channel(667025203523616773)
     channel.send(f"Report: {pasteLink}")

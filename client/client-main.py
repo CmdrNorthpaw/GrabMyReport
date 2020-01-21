@@ -4,7 +4,10 @@ import grabCrashReport
 import grabProcessReport
 import grabSysReport
 import grabHostFile
+import pickle
 os = platform.system()
+listData = []
+
 print("""
 =============================================================================================
    ____                  _       __  __           ____                                  _
@@ -33,6 +36,10 @@ elif grabWanted == 3:
 elif grabWanted == 4:
     report = grabHostFile.readHost(os)
 
+listData.append(report)
+listData.append(discordUser)
+data = pickle.dumps(listData)
+
 def run_client(host, port):
     global report
     global discordUser
@@ -41,7 +48,7 @@ def run_client(host, port):
     client.connect((host, port))
 
     # convert to bytes and send on the socket
-    client.send(report.encode('utf-8'))
+    client.send(data.encode('utf-8'))
     #client.send(discordUser.encode('utf-8'))
     # read back the response
 
