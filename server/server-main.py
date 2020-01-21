@@ -1,5 +1,14 @@
 import socket
-import pasteAndSend
+import threading
+import discord
+from discord.ext import commands
+from os import environ
+import hastebin
+import logging
+discordKey = environ.get('grabMyReportKey')
+logging.basicConfig(level=logging.INFO)
+
+bot = commands.Bot(command_prefix='?')
 
 def run_server(host, port):
     global report
@@ -11,6 +20,7 @@ def run_server(host, port):
 
     # bind to the provided address tuple, configure, and start accepting connections
     server.bind((host, port))
+    logging.info('Socket server running')
     # set timeout - the value can change, but it's hygienic to always set a timeout
     server.settimeout(1)
     server.listen()
@@ -41,4 +51,5 @@ def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-run_server('0.0.0.0', 9254)
+threading.Thread(target=run_server, args=('0.0.0.0', 9254)).start()
+threading.Thread(target=bot.run, args=(discordKey)).start()
