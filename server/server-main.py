@@ -10,6 +10,10 @@ logging.basicConfig(level=logging.INFO)
 
 bot = commands.Bot(command_prefix='?')
 
+@bot.event
+def on_login()u:
+    logging.info("Bot logged in")
+
 def pasteAndSend(data):
     data = data.decode('utf-8')
     pasteLink = hastebin.post(data)
@@ -58,4 +62,4 @@ def run_server(host, port):
             # if we didn't break, just prepend the message and return as is
 
 threading.Thread(target=run_server, args=('0.0.0.0', 9254)).start()
-threading.Thread(target=bot.run, args=(discordKey)).start()
+bot.run(discordKey)
