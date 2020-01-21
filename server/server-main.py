@@ -61,5 +61,5 @@ def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-threading.Thread(target=run_server, args=('0.0.0.0', 9254)).start()
+threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
 bot.run(discordKey)
