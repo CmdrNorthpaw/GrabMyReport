@@ -46,13 +46,8 @@ def run_server(host, port):
         # repeatedly read up to 1024 bytes from the new client
         while True:
             incoming = newClient.recv(1024)
-            # empty bytes object means EOF here, but we also let the client send 'quit' to signal shutdown
-            if incoming:
-                print(incoming)
-                pasteAndSend(incoming)
             if incoming == b'' or incoming == b'quit':
-               # neither of these steps are formally required, but are
-               # hygienic to do when we know the socket is going away
+               pasteAndSend(incoming)
                newClient.shutdown(socket.SHUT_RDWR)
                newClient.close()
                # break the inner loop and await a new connection
