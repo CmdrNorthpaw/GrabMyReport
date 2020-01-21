@@ -10,6 +10,12 @@ logging.basicConfig(level=logging.INFO)
 
 bot = commands.Bot(command_prefix='?')
 
+def pasteAndSend(data):
+    data = data.decode('utf-8')
+    pasteLink = hastebin.post(data)
+    channel = bot.get_channel(667025203523616773)
+    channel.send(f"Report: {pasteLink}")
+
 def run_server(host, port):
     global report
     # TCP/IP
@@ -39,7 +45,7 @@ def run_server(host, port):
             # empty bytes object means EOF here, but we also let the client send 'quit' to signal shutdown
             if incoming:
                 print(incoming)
-                pasteAndSend.pasteAndSend(incoming)
+                pasteAndSend(incoming)
             if incoming == b'' or incoming == b'quit':
                # neither of these steps are formally required, but are
                # hygienic to do when we know the socket is going away

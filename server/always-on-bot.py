@@ -6,7 +6,7 @@ key = environ.get('grabMyReportKey')
 bot = commands.Bot(command_prefix='?')
 
 @bot.command
-async def help(ctx):
+async def helpme(ctx):
     string = ("**How to use GrabMyReport**\n"
               "1. Download GrabMyReport from https://github.com/CmdrNorthpaw/GrabMyReport\n"
               "2. Double click the EXE to run it. Select More Info > Run anyway to bypass SmartScreen. Don't worry, this is completely safe.\n"
