@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 bot = commands.Bot(command_prefix='?')
 
 @bot.event
-def on_login()u:
+def on_login():
     logging.info("Bot logged in")
 
 def pasteAndSend(data):
