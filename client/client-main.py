@@ -49,7 +49,7 @@ def run_client(host, port):
 
     # convert to bytes and send on the socket
     client.send(data.encode('utf-8'))
-    #client.send(discordUser.encode('utf-8'))
+    client.send('quit'.encode('utf-8'))
     # read back the response
 
 run_client('192.168.1.111', 9254)
