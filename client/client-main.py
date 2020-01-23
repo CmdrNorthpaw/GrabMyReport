@@ -48,7 +48,7 @@ def run_client(host, port):
     client.connect((host, port))
 
     # convert to bytes and send on the socket
-    client.send(data.encode('utf-8'))
+    client.send(data)
     client.send('quit'.encode('utf-8'))
     # read back the response
 
