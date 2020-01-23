@@ -16,7 +16,6 @@ async def on_login():
     logging.info("Bot logged in")
 
 def pasteAndSend(data):
-    data = data.decode('utf-8')
     data = pickle.loads(data)
     pasteLink = hastebin.post(data)
     channel = bot.get_channel(667025203523616773)
