@@ -16,10 +16,12 @@ async def on_login():
     logging.info("Bot logged in")
 
 def pasteAndSend(data):
-    data = pickle.loads(data)
-    pasteLink = hastebin.post(data)
-    channel = bot.get_channel(667025203523616773)
-    channel.send(f"Report: {pasteLink}")
+    try:
+        data = pickle.loads(data)
+    except EOFError:
+        pasteLink = hastebin.post(data)
+        channel = bot.get_channel(667025203523616773)
+        channel.send(f"Report: {pasteLink}")
 
 def run_server(host, port):
     global report
