@@ -19,7 +19,9 @@ def pasteAndSend(data):
     try:
         data = pickle.loads(data)
     except EOFError:
+        logging.info('Data recieved; pasting...')
         pasteLink = hastebin.post(data)
+        logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
         channel.send(f"Report: {pasteLink}")
 
