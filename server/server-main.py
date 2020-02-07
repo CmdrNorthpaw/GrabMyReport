@@ -16,13 +16,13 @@ async def on_login():
     logging.info("Bot logged in")
 
 def pasteAndSend(data):
-    dataList = []
+    finalData = ''.join(data)
     try:
-        data = pickle.loads(data)
+        data = pickle.loads(finalData)
     except EOFError:
         logging.info('Data recieved; pasting...')
-        finalData = ''.join(dataList)
         pasteLink = hastebin.post(finalData)
+        print(pasteLink)
         logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
         await channel.send(f"Report: {pasteLink}")
