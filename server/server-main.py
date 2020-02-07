@@ -25,7 +25,7 @@ def pasteAndSend(data):
         pasteLink = hastebin.post(finalData)
         logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
-        channel.send(f"Report: {pasteLink}")
+        await channel.send(f"Report: {pasteLink}")
 
 def run_server(host, port):
     global report
