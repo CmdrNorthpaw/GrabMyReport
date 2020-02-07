@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='?')
 @bot.event
 async def on_login():
     logging.info("Bot logged in")
+    await run_server('0.0.0.0', 9254)
 
 async def pasteAndSend(data):
     finalData = b''.join(data)
@@ -66,5 +67,4 @@ async def run_server(host, port):
             # if we didn't break, just prepend the message and return as is
 
 #threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
-run_server('0.0.0.0', 9254)
 bot.run(discordKey)
