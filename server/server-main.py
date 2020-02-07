@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix='?')
 async def on_login():
     logging.info("Bot logged in")
 
-def pasteAndSend(data):
+async def pasteAndSend(data):
     finalData = ''.join(data)
     try:
         data = pickle.loads(finalData)
