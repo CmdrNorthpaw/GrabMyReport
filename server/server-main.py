@@ -16,17 +16,20 @@ async def on_login():
     logging.info("Bot logged in")
 
 def pasteAndSend(data):
+    dataList = []
     try:
         data = pickle.loads(data)
     except EOFError:
         logging.info('Data recieved; pasting...')
-        pasteLink = hastebin.post(data)
+        finalData = dataList.join()
+        pasteLink = hastebin.post(finalData)
         logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
         channel.send(f"Report: {pasteLink}")
 
 def run_server(host, port):
     global report
+    incomingList = []
     # TCP/IP
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -51,6 +54,7 @@ def run_server(host, port):
         # repeatedly read up to 1024 bytes from the new client
         while True:
             incoming = newClient.recv(1024)
+            incomingList.append(incoming)
             if incoming == b'' or incoming == b'quit':
                pasteAndSend(incoming)
                newClient.shutdown(socket.SHUT_RDWR)
