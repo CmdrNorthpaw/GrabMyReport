@@ -27,7 +27,7 @@ async def pasteAndSend(data):
         channel = bot.get_channel(667025203523616773)
         await channel.send(f"Report: {pasteLink}")
 
-def run_server(host, port):
+async def run_server(host, port):
     global report
     incomingList = []
     # TCP/IP
@@ -65,5 +65,6 @@ def run_server(host, port):
         report = incoming.decode('utf-8')
             # if we didn't break, just prepend the message and return as is
 
-threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
+#threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
+await run_server('0.0.0.0', 9254)
 bot.run(discordKey)
