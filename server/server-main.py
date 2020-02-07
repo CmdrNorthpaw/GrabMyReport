@@ -16,7 +16,7 @@ async def on_login():
     logging.info("Bot logged in")
 
 async def pasteAndSend(data):
-    finalData = ''.join(data)
+    finalData = b''.join(data)
     try:
         data = pickle.loads(finalData)
     except EOFError:
@@ -56,7 +56,7 @@ def run_server(host, port):
             incoming = newClient.recv(1024)
             incomingList.append(incoming)
             if incoming == b'' or incoming == b'quit':
-               pasteAndSend(incoming)
+               await pasteAndSend(incoming)
                newClient.shutdown(socket.SHUT_RDWR)
                newClient.close()
                # break the inner loop and await a new connection
