@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 bot = commands.Bot(command_prefix='?')
 
 @bot.event
-async def on_login():
+async def on_ready():
     logging.info("Bot logged in")
     await run_server('0.0.0.0', 9254)
 
