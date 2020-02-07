@@ -52,5 +52,5 @@ def run_client(host, port):
     client.send('quit'.encode('utf-8'))
     # read back the response
 
-run_client('34.73.189.184', 9254)
+run_client('192.168.1.111', 9254)
 print('Report sent to Discord! You can close this window now')
