@@ -67,4 +67,8 @@ async def run_server(host, port):
             # if we didn't break, just prepend the message and return as is
 
 #threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
+<<<<<<< HEAD
+=======
+await run_server('0.0.0.0', 9254)
+>>>>>>> d15520f21ae88451e30d6baf9302d99320591119
 bot.run(discordKey)
