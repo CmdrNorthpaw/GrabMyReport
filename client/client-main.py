@@ -43,8 +43,8 @@ data = pickle.dumps(listData)
 
 async def sendData():
     global data
-    async with websockets.connect('192.168.1.114:9254') as socket
-    await socket.send(data)
+    async with websockets.connect('192.168.1.114:9254') as socket:
+        await socket.send(data)
 
 
 print('Report sent to Discord! You can close this window now')
