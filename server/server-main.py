@@ -1,5 +1,5 @@
-import socket
-import threading
+import websockets
+import asyncio
 import discord
 from discord.ext import commands
 from os import environ
@@ -14,7 +14,6 @@ bot = commands.Bot(command_prefix='?')
 @bot.event
 async def on_ready():
     logging.info("Bot logged in")
-    await run_server('0.0.0.0', 9254)
 
 async def pasteAndSend(data):
     finalData = b''.join(data)
@@ -28,43 +27,12 @@ async def pasteAndSend(data):
         channel = bot.get_channel(667025203523616773)
         await channel.send(f"Report: {pasteLink}")
 
-async def run_server(host, port):
-    global report
-    incomingList = []
-    # TCP/IP
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+async def dataRecieve(websocket, path):
+    incoming = await websocket.recv()
+    print(incoming)
 
-    # this lets us take ownership of a derelict-but-not-deallocated socket
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-    # bind to the provided address tuple, configure, and start accepting connections
-    server.bind((host, port))
-    logging.info('Socket server running')
-    # set timeout - the value can change, but it's hygienic to always set a timeout
-    server.settimeout(1)
-    server.listen()
-
-    while True:
-        # just try again if we timed out - in a normal application we might want
-        # to do other kinds of bookkeeping etc if this happens
-        try:
-            newClient = server.accept()[0]
-        except socket.timeout:
-            continue
-
-        # repeatedly read up to 1024 bytes from the new client
-        while True:
-            incoming = newClient.recv(1024)
-            incomingList.append(incoming)
-            if incoming == b'' or incoming == b'quit':
-               await pasteAndSend(incoming)
-               newClient.shutdown(socket.SHUT_RDWR)
-               newClient.close()
-               # break the inner loop and await a new connection
-               break
-
-        report = incoming.decode('utf-8')
-            # if we didn't break, just prepend the message and return as is
-
-#threading.Thread(target=run_server, args=('0.0.0.0', 9254), daemon=True).start()
 bot.run(discordKey)
+
+server = websockets.serve(dataRecieve, 'localhost', 9254)
+asyncio.get_event_loop().run_until_complete(server)
+asyncio.get_event_loop().run_forever()

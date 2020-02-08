@@ -1,4 +1,5 @@
-import socket
+import websockets
+import asyncio
 import platform
 import grabCrashReport
 import grabProcessReport
@@ -40,17 +41,10 @@ listData.append(report)
 listData.append(discordUser)
 data = pickle.dumps(listData)
 
-def run_client(host, port):
-    global report
-    global discordUser
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # connect to the provided address tuple
-    client.connect((host, port))
+async def sendData():
+    global data
+    async with websockets.connect('192.168.1.114:9254') as socket
+    await socket.send(data)
 
-    # convert to bytes and send on the socket
-    client.send(data)
-    client.send('quit'.encode('utf-8'))
-    # read back the response
 
-run_client('192.168.1.111', 9254)
 print('Report sent to Discord! You can close this window now')
