@@ -16,9 +16,8 @@ async def on_ready():
     logging.info("Bot logged in")
 
 async def pasteAndSend(data):
-    finalData = b''.join(data)
     try:
-        data = pickle.loads(finalData)
+        data = pickle.loads(data)
     except EOFError:
         logging.info('Data recieved; pasting...')
         pasteLink = hastebin.post(finalData)
@@ -28,8 +27,10 @@ async def pasteAndSend(data):
         await channel.send(f"Report: {pasteLink}")
 
 async def dataRecieve(websocket, path):
+    logging.info('Server Running')
     incoming = await websocket.recv()
     print(incoming)
+    pasteAndSend(incoming)
 
 bot.run(discordKey)
 
