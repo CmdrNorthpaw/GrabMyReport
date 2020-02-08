@@ -24,7 +24,7 @@ async def pasteAndSend(data):
         print(pasteLink)
         logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
-        await channel.send(f"Report: {p asteLink}")
+        await channel.send(f"Report: {pasteLink}")
 
 async def dataRecieve(websocket, path):
     logging.info('Server Running')
