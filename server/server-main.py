@@ -37,6 +37,5 @@ async def reciever():
 
 server = websockets.serve(reciever, 'localhost', 9254)
 asyncio.get_event_loop().run_until_complete(server)
-asyncio.get_event_loop().run_forever()
 
 bot.run(discordKey)
