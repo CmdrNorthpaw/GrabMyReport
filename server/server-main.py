@@ -32,7 +32,7 @@ async def reciever():
     async with websockets.connect(host) as socket:
         print('Socket server running')
         data = await socket.recv()
-        data = pickle.unloads(data)
+        data = pickle.loads(data)
         pasteAndSend(data)
 
 server = websockets.serve(reciever, 'localhost', 9254)
