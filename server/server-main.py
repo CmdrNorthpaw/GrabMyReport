@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='?')
 @bot.event
 async def on_ready():
     logging.info("Bot logged in")
+    await reciever()
 
 async def pasteAndSend(data):
     try:
