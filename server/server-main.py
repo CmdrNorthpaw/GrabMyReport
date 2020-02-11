@@ -29,12 +29,13 @@ async def pasteAndSend(data):
 async def reciever():
     host = 'ws://localhost:9254'
     async with websockets.connect(host) as socket:
+        print('Socket server running')
         data = await socket.recv()
         data = pickle.unloads(data)
         pasteAndSend(data)
 
-bot.run(discordKey)
-
 server = websockets.serve(reciever, 'localhost', 9254)
 asyncio.get_event_loop().run_until_complete(server)
-#asyncio.get_event_loop().run_forever()
+asyncio.get_event_loop().run_forever()
+
+bot.run(discordKey)
