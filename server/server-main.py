@@ -3,7 +3,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from os import environ
-import async_hastebin as hastebin
+import hastebin
 import logging
 import pickle
 discordKey = environ.get('grabMyReportKey')
@@ -20,20 +20,21 @@ async def pasteAndSend(data):
         data = pickle.loads(data)
     except EOFError:
         logging.info('Data recieved; pasting...')
-        pasteLink = await hastebin.post(data)
+        pasteLink = hastebin.post(data)
         print(pasteLink)
         logging.info('Data posted to Hastebin')
         channel = bot.get_channel(667025203523616773)
         await channel.send(f"Report: {pasteLink}")
 
-async def dataRecieve(websocket, path):
-    logging.info('Server Running')
-    incoming = await websocket.recv()
-    print(incoming)
-    pasteAndSend(incoming)
+async def reciever():
+    host = 'ws://localhost:9254'
+    async with websockets.connect(host) as socket:
+        data = await socket.recv()
+        data = pickle.unloads(data)
+        pasteAndSend(data)
 
 bot.run(discordKey)
 
-server = websockets.serve(dataReceive, 'localhost', 9254)
+server = websockets.serve(receiver, 'localhost', 9254)
 asyncio.get_event_loop().run_until_complete(server)
 asyncio.get_event_loop().run_forever()
