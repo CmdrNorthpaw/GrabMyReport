@@ -28,14 +28,14 @@ async def pasteAndSend(data):
         await channel.send(f"Report: {pasteLink}")
 
 async def reciever():
-    host = 'ws://localhost:9254'
+    host = 'ws://192.168.1.114:9254'
     async with websockets.connect(host) as socket:
         print('Socket server running')
         data = await socket.recv()
         data = pickle.loads(data)
         pasteAndSend(data)
 
-server = websockets.serve(reciever, 'localhost', 9254)
+server = websockets.serve(reciever, 'localhost', 9254, ping_timeout=None)
 asyncio.get_event_loop().run_until_complete(server)
 
 bot.run(discordKey)

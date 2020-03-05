@@ -43,7 +43,7 @@ data = pickle.dumps(listData)
 
 async def sendData():
     global data
-    uri = 'ws://34.73.189.184:9254'
+    uri = 'ws://192.168.1.114:9254'
     async with websockets.connect(uri) as websocket:
         await websocket.send(data)
 
